@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --navy: #12315c;
+      --blue: #2563eb;
+      --light-blue: #eff6ff;
+      --green: #15803d;
+      --red: #b91c1c;
+      --border: #dbe3ee;
+      --text: #172033;
+      --muted: #64748b;
+      --background: #f3f6fb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    .header {
+      padding: 30px;
+      color: white;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    .header p {
+      margin: 0;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .form-section {
+      padding: 30px;
+    }
+
+    .form-section h2 {
+      margin-top: 0;
+      color: var(--navy);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 700;
+    }
+
+    .required {
+      color: var(--red);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: var(--blue);
+      color: white;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.65;
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .success {
+      display: block;
+      color: var(--green);
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+    }
+
+    .error {
+      display: block;
+      color: var(--red);
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+    }
+
+    .footer {
+      padding: 16px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--light-blue);
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 0;
+      }
+
+      .container {
+        min-height: 100vh;
+        border-radius: 0;
+      }
+
+      .header,
+      .form-section {
+        padding: 22px;
+      }
+
+      .header h1 {
+        font-size: 25px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="header">
+      <h1>NezFlow Lead Enquiry</h1>
+      <p>
+        Tell us what your business needs.
+        Our team will contact you shortly.
+      </p>
+    </div>
+
+    <div class="form-section">
+      <h2>Contact information</h2>
+
+      <form id="leadForm">
+
+        <div class="grid">
+
+          <div class="field">
+            <label>
+              Customer Name <span class="required">*</span>
+            </label>
+
+            <input
+              type="text"
+              name="customerName"
+              placeholder="Enter your name"
+              required>
+          </div>
+
+          <div class="field">
+            <label>
+              Mobile Number <span class="required">*</span>
+            </label>
+
+            <input
+              type="tel"
+              name="mobile"
+              inputmode="numeric"
+              pattern="[0-9]{10}"
+              maxlength="10"
+              placeholder="10-digit mobile number"
+              required>
+          </div>
+
+          <div class="field">
+            <label>Email Address</label>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="example@email.com">
+          </div>
+
+          <div class="field">
+            <label>
+              Service Interested <span class="required">*</span>
+            </label>
+
+            <select name="service" required>
+              <option value="">Select a service</option>
+              <option>Excel Automation</option>
+              <option>Google Sheets Automation</option>
+              <option>Dashboard & Reporting</option>
+              <option>Website Development</option>
+              <option>API Integration</option>
+              <option>Mobile Business System</option>
+            </select>
+          </div>
+
+          <div class="field full-width">
+            <label>How did you find us?</label>
+
+            <select name="source">
+              <option>Website</option>
+              <option>Instagram</option>
+              <option>LinkedIn</option>
+              <option>WhatsApp</option>
+              <option>Google Maps</option>
+              <option>Referral</option>
+            </select>
+          </div>
+
+          <div class="field full-width">
+            <label>Requirement / Notes</label>
+
+            <textarea
+              name="notes"
+              placeholder="Briefly explain the automation or business system you need"></textarea>
+          </div>
+
+        </div>
+
+        <button type="submit" id="submitButton">
+          Submit Enquiry
+        </button>
+
+        <div id="message" class="message"></div>
+
+      </form>
+    </div>
+
+    <div class="footer">
+      Powered by NezFlow Automation
+    </div>
+
+  </div>
+
+  <script>
+    const form = document.getElementById("leadForm");
+    const button = document.getElementById("submitButton");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      message.className = "message";
+      message.textContent = "";
+
+      button.disabled = true;
+      button.textContent = "Submitting...";
+
+      const formData = Object.fromEntries(
+        new FormData(form).entries()
+      );
+
+      google.script.run
+        .withSuccessHandler(function(result) {
+          button.disabled = false;
+          button.textContent = "Submit Enquiry";
+
+          message.className = "message success";
+          message.textContent =
+            "✅ Enquiry submitted successfully. Lead ID: " +
+            result.leadId;
+
+          form.reset();
+        })
+        .withFailureHandler(function(error) {
+          button.disabled = false;
+          button.textContent = "Submit Enquiry";
+
+          message.className = "message error";
+          message.textContent =
+            "❌ " + (error.message || "Submission failed.");
+        })
+        .submitLead(formData);
+    });
+  </script>
+
+</body>
+</html>
